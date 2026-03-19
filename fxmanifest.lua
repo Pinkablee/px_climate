@@ -6,7 +6,11 @@ version '0.1.0'
 description 'Lightweight real-time weather and time sync for FiveM.'
 
 client_script 'client/main.lua'
-server_script 'server/main.lua'
+
+server_scripts {
+    'server/main.lua',
+    'server/version.lua'
+}
 
 shared_scripts {
     '@ox_lib/init.lua'
