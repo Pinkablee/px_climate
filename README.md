@@ -106,6 +106,12 @@ https://discord.gg/pinkable
 
 ## License
 
-This resource is licensed for use on your server only.
+This resource is for use on your server only.
 
-Reselling, redistributing, sharing this resource in any form is strictly prohibited.
+Reselling, redistributing, sharing, leaking, or reuploading any of pinkable.dev resources in any form is strictly prohibited.
+
+You may not remake, edit, or use any part of pinkable.dev resources to create your own release.
+
+Do not claim this work as your own.
+
+Violation of these terms will result in access being revoked.
