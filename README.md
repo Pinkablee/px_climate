@@ -1,24 +1,40 @@
 # px_climate
 
-px_climate is a real-time weather and time sync system for FiveM that pulls live data and keeps your server synced automatically.
+px_climate is a real-time weather and time sync system for FiveM built to keep your server environment updated automatically with a cleaand lightweight setup.
 
-It uses Open-Meteo to grab real-world weather based on your configured location, converts it into GTA weather types, and syncs it across all players using GlobalState. Time is also synced properly using timezone offsets so it stays accurate without drifting.
+It pulls live weather data from your configured location, converts it into GTA weather states, and syncs both weather and time across thserver without the bloated feel of larger climate resources.
 
-Everything is handled server-side and pushed to clients, so there’s no weird desync or flickering.
+Everything is handled server-side and pushed cleanly to clients, so the system stays practical, smooth, and easy to maintain.
 
 ---
 
 ## How it works
 
-When the resource starts, it sets a fallback weather so the server isn’t stuck waiting on the API.
+g 
+When the resource starts, it applies a fallback weather state so the server always has a valid environment while live data is being 
+fetched.
 
-After that, it requests live weather data using your latitude, longitude, and timezone. The returned weather code gets mapped into a GTA weather type like CLEAR, RAIN, FOGGY, etc.
+After that, it requests weather data using your configured latitude, longitude, and timezone. The returned weather values are mapped intGTA weather types such as clear, rain, fog, and similar states.
 
-That weather gets stored in GlobalState and is automatically applied on all clients.
+Weather is stored server-side and synced to all clients so everyone stays consistent.
 
-Time works the same way. The server calculates the correct Los Angeles time using the API offset, then clients continuously update their clock based on that value so it stays smooth and accurate.
+t
+Time is handled the same way. The resource calculates the correct synced time using the configured timezone and keeps it updated without
+drifting.
 
-If the API fails at any point, nothing breaks. It just keeps the last known state and retries on the next interval.
+If the API fails at any point, nothing breaks. The script keeps the last known state and retries again on the next update interval.
+
+---
+
+## Features
+
+- Real-time weather syncing based on a configured location
+- Automatic time syncing with timezone-aware handling
+- GTA weather state mapping from live weather data
+- Fully server-side controlled syncing
+- Smooth weather transitions for a cleaner result
+- Configurable update intervals and optional forced weather
+- Lightweight structure built for simple deployment and easy maintenance
 
 ---
 
@@ -32,23 +48,23 @@ Then open:
 
 config/shared.lua
 
-and set your location, intervals, and optional weather lock.
+and configure your location, timezone, update intervals, and optional locked weather settings.
 
 ---
 
 ## Config
 
-Latitude and Longitude control where the weather is pulled from.
+Latitude and Longitude control where live weather data is pulled from.
 
-Timezone controls the time sync and handles daylight saving automatically.
+Timezone controls how server time is calculated and synced.
 
-FetchIntervalMinutes controls how often weather is updated.
+FetchIntervalMinutes controls how often new weather data is requested.
 
 BroadcastIntervalMs controls how often the server pushes updates.
 
-WeatherTransitionSeconds controls how smooth weather changes are.
+WeatherTransitionSeconds controls how smoothly weather changes are applied.
 
-LockedWeather will force a specific weather and disable live syncing if you set it.
+LockedWeather lets you force a specific weather type instead of using live syncing.
 
 ---
 
@@ -56,7 +72,7 @@ LockedWeather will force a specific weather and disable live syncing if you set 
 
 /weather
 
-Shows the current synced weather and Los Angeles time.
+Displays the current synced weather and current synced time.
 
 ---
 
@@ -64,31 +80,29 @@ Shows the current synced weather and Los Angeles time.
 
 exports['px_climate']:getWeatherType()
 
-Returns current weather type.
+Returns the current synced weather type.
 
 exports['px_climate']:getLATime()
 
-Returns hour, minute, second.
+Returns the current synced hour, minute, and second.
 
 exports['px_climate']:getLATimeFormatted()
 
-Returns formatted time like 1:42PM.
+Returns the current synced time in a formatted string.
 
 exports['px_climate']:getWeatherAndTime()
 
-Returns everything in one table.
+Returns the synced weather and time data in one table.
 
 ---
 
 ## Notes
 
-Everything is server controlled.
+Everything is controlled server-side and clients only apply the synced state they receive.
 
-Clients just apply what they receive.
+The resource is built to avoid unnecessary loops, constant API spam, or messy client-side handling.
 
-No constant API spam, no heavy loops, no unnecessary logic.
-
-If you want static weather, just set LockedWeather and it overrides everything.
+If you want a static setup instead of live weather, you can set LockedWeather and force a specific climate state.
 
 ---
 
@@ -101,17 +115,3 @@ https://github.com/overextended/ox_lib
 ## Support
 
 https://discord.gg/pinkable
-
----
-
-## License
-
-This resource is for use on your server only.
-
-Reselling, redistributing, sharing, leaking, or reuploading any of pinkable.dev resources in any form is strictly prohibited.
-
-You may not remake, edit, or use any part of pinkable.dev resources to create your own release.
-
-Do not claim this work as your own.
-
-Violation of these terms will result in access being revoked.
